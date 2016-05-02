@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		162A92AE1CD6FCC300762DE9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162A92AD1CD6FCC300762DE9 /* main.cpp */; };
+		162A92C21CD712AC00762DE9 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162A92BF1CD712AC00762DE9 /* json_reader.cpp */; };
+		162A92C31CD712AC00762DE9 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162A92C01CD712AC00762DE9 /* json_value.cpp */; };
+		162A92C41CD712AC00762DE9 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 162A92C11CD712AC00762DE9 /* json_writer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,10 @@
 /* Begin PBXFileReference section */
 		162A92AA1CD6FCC300762DE9 /* filesystem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = filesystem; sourceTree = BUILT_PRODUCTS_DIR; };
 		162A92AD1CD6FCC300762DE9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		162A92BD1CD7125100762DE9 /* jsoncpp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = jsoncpp; sourceTree = "<group>"; };
+		162A92BF1CD712AC00762DE9 /* json_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = json_reader.cpp; path = jsoncpp/src/lib_json/json_reader.cpp; sourceTree = "<group>"; };
+		162A92C01CD712AC00762DE9 /* json_value.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = jsoncpp/src/lib_json/json_value.cpp; sourceTree = "<group>"; };
+		162A92C11CD712AC00762DE9 /* json_writer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = jsoncpp/src/lib_json/json_writer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +48,10 @@
 		162A92A11CD6FCC300762DE9 = {
 			isa = PBXGroup;
 			children = (
+				162A92BF1CD712AC00762DE9 /* json_reader.cpp */,
+				162A92C01CD712AC00762DE9 /* json_value.cpp */,
+				162A92C11CD712AC00762DE9 /* json_writer.cpp */,
+				162A92BD1CD7125100762DE9 /* jsoncpp */,
 				162A92AC1CD6FCC300762DE9 /* filesystem */,
 				162A92AB1CD6FCC300762DE9 /* Products */,
 			);
@@ -118,6 +129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162A92C21CD712AC00762DE9 /* json_reader.cpp in Sources */,
+				162A92C31CD712AC00762DE9 /* json_value.cpp in Sources */,
+				162A92C41CD712AC00762DE9 /* json_writer.cpp in Sources */,
 				162A92AE1CD6FCC300762DE9 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,14 +223,18 @@
 		162A92B21CD6FCC300762DE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/jsoncpp/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
 		162A92B31CD6FCC300762DE9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/jsoncpp/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};
