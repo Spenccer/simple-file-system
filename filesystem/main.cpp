@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <time.h>
 #include <vector>
 #include "json/json.h"
 
@@ -14,6 +15,7 @@ private:
     Json::Value *curr;
     string diskDir;
     string diskContent;
+    int inode = 0;
     
     vector<string> split(string str)
     {
@@ -86,12 +88,60 @@ public:
         (*curr)["files"].append(item);
     }
     
-    void makeFile(string name)
+    void makeFile(string name = "New file")
     {
         Json::Value item;
+        time_t tt = time(NULL);
+        int s = name.length();
         item["name"] = name;
         item["type"] = "file";
+        item["author"] = "fs";
+        //       item["time"] = struct localtime(&tt);
+        item["block_num"] = inode;
+        item["size"] = s;
+        inode++;
+        if (inode == 255)
+        {
+            cout<<"The disk is full." <<endl;
+            return;
+        }
         (*curr)["files"].append(item);
+    }
+    
+    void addData(string name,string data)
+    {
+        for (auto item : (*curr)["files"])
+        {
+            if( item["name"] == name)
+            {
+                if( item["type"] != "file")
+                {
+                    cout<<"Can't put data into this type of data."<<endl;
+                    return;
+                }
+                std::ofstream ofs;
+                ofs.open("/Users/Spencer/Documents/www.txt");
+                ofs << data;
+                ofs.close();
+                int s = data.length();
+                int temp = item["size"].asInt();
+                temp += s;
+                cout<<temp<<endl;
+                item["size"] = temp;
+                /* if( item["size"] >= 5)
+                 {
+                 inode++;
+                 if (inode == 255)
+                 {
+                 cout<<"The disk is full." <<endl;
+                 return;
+                 }
+                 item["block_num"].append(inode);
+                 
+                 }*/
+            }
+        }
+        
     }
     
     void deleteDir(string dirStr)
@@ -129,7 +179,7 @@ public:
         diskContent.replace(0, strWrite.length(), strWrite);
         
         std::ofstream ofs;
-        ofs.open("/Users/wangsijie/desktop/test.txt");
+        ofs.open("/Users/Spencer/Documents/test.txt");
         ofs << diskContent;
         ofs.close();
     }
@@ -138,10 +188,12 @@ public:
 
 int main(int argc, const char * argv[])
 {
-    fs fs("/Users/wangsijie/desktop/disk.txt");
+    fs fs("/Users/Spencer/Documents/disk.txt");
     fs.list();
-    fs.makeDir("test");
-    cout << "after making new dir test:" << endl;
+    fs.makeFile("test");
+    fs.makeFile("test2");
+    fs.addData("test2","hello world");
+    cout << "after making new file test:" << endl;
     fs.list();
     fs.changeDir("home");
     cout << "after changing dir to home:" << endl;
